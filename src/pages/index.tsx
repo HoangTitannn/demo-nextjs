@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Box, Button, TextField } from '@radix-ui/themes'
 import VirtualizedList from '@/components/VirtualizedList'
 import Image from 'next/image'
+import { Link } from 'lucide-react'
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false)
@@ -66,7 +67,7 @@ export default function Home() {
         <div className="sticky w-full top-0 z-[49]">
           <div className="w-full h-12 bg-[#1189e5] dark:bg-slate-800 flex flex-col justify-center items-center">
             <div className="w-full max-md:w-[100vw] max-w-7xl flex h-full justify-start items-center pl-4 pr-10 sm:px-6 lg:px-8 gap-8 max-md:mr-5 max-sm:mr-1 max-sm:gap-3 max-md:justify-between overflow-x-auto no-scrollbar">
-              <a className="font-semibold text-white" href="/">
+              <Link className="font-semibold text-white" href="/">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -82,8 +83,8 @@ export default function Home() {
                   <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
                 data-state="closed"
                 href="/thi-truong"
@@ -103,43 +104,43 @@ export default function Home() {
                 >
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
                 data-state="closed"
                 href="/kinh-te"
               >
                 Kinh tế - đầu tư
-              </a>
-              <a
+              </Link>
+              <Link
                 className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
                 data-state="closed"
                 href="/tai-chinh"
               >
                 Tài chính
-              </a>
-              <a
+              </Link>
+              <Link
                 className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
                 data-state="closed"
                 href="/doanh-nghiep"
               >
                 Doanh nghiệp
-              </a>
-              <a
+              </Link>
+              <Link
                 className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
                 data-state="closed"
                 href="/tien-so"
               >
                 Tiền số
-              </a>
-              <a
+              </Link>
+              <Link
                 className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
                 data-state="closed"
                 href="https://fireant.vn/"
               >
                 Công cụ đầu tư
-              </a>
-              <a
+              </Link>
+              <Link
                 className="max-lg:hidden whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
                 data-state="closed"
                 href="/"
@@ -159,7 +160,7 @@ export default function Home() {
                 >
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
-              </a>
+              </Link>
             </div>
             <div className="absolute right-0 h-12 flex items-center bg-gradient-to-l from-[#1189e5] dark:from-slate-800 from-35% to-100% to-transparent pl-12 max-md:pl-10 lg:hidden">
               <div className="w-9 h-9 flex items-center justify-center cursor-pointer">
