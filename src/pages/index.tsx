@@ -1,123 +1,190 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import Head from 'next/head'
-
-const inter = Inter({ subsets: ['latin'] })
+import { MagnifyingGlassIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
+import { useEffect, useState } from 'react'
+import { Box, Button, TextField } from '@radix-ui/themes'
+import VirtualizedList from '@/components/VirtualizedList'
+import Image from 'next/image'
 
 export default function Home() {
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  useEffect(() => {
+    if (localStorage.getItem('theme') === 'dark') {
+      setIsDarkMode(true)
+      document.documentElement.classList.add('dark')
+    } else {
+      setIsDarkMode(false)
+      document.documentElement.classList.remove('dark')
+    }
+  }, [])
+
+  const toggleDarkMode = () => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+      setIsDarkMode(false)
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+      setIsDarkMode(true)
+    }
+  }
+
   return (
     <>
       <Head>
-        <title>Custom Title</title>
+        <title>Stockbiz</title>
       </Head>
-      <main
-        className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-      >
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-          <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-            Get started by editing&nbsp;
-            <code className="font-mono font-bold">src/pages/index.tsx</code>
-          </p>
-          <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-            <a
-              className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className="dark:invert"
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+      <main className="bg-white h-[100vh] dark:bg-slate-900">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          <header className="h-[70px] z-[150] py-4 flex justify-between">
+            <Image src={'/images/logo.png'} width={150} height={80} alt="logo" />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={toggleDarkMode}
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+              >
+                {isDarkMode ? (
+                  <SunIcon className="h-6 w-6 text-yellow-500" />
+                ) : (
+                  <MoonIcon className="h-6 w-6 text-gray-900" />
+                )}
+              </button>
+              <Box maxWidth="350px">
+                <TextField.Root size="2" placeholder="Tìm kiếm...">
+                  <TextField.Slot side="right">
+                    <MagnifyingGlassIcon height="16" width="16" />
+                  </TextField.Slot>
+                </TextField.Root>
+              </Box>
+              <Button className="px-3 dark:text-[#e1e7ef]" color="gray" variant="outline">
+                Đăng nhập
+              </Button>
+            </div>
+          </header>
+        </div>
+        <div className="sticky w-full top-0 z-[49]">
+          <div className="w-full h-12 bg-[#1189e5] dark:bg-slate-800 flex flex-col justify-center items-center">
+            <div className="w-full max-md:w-[100vw] max-w-7xl flex h-full justify-start items-center pl-4 pr-10 sm:px-6 lg:px-8 gap-8 max-md:mr-5 max-sm:mr-1 max-sm:gap-3 max-md:justify-between overflow-x-auto no-scrollbar">
+              <a className="font-semibold text-white" href="/">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="lucide lucide-home"
+                >
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </a>
+              <a
+                className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
+                data-state="closed"
+                href="/thi-truong"
+              >
+                Thị trường
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="w-5 h-5"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </a>
+              <a
+                className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
+                data-state="closed"
+                href="/kinh-te"
+              >
+                Kinh tế - đầu tư
+              </a>
+              <a
+                className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
+                data-state="closed"
+                href="/tai-chinh"
+              >
+                Tài chính
+              </a>
+              <a
+                className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
+                data-state="closed"
+                href="/doanh-nghiep"
+              >
+                Doanh nghiệp
+              </a>
+              <a
+                className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
+                data-state="closed"
+                href="/tien-so"
+              >
+                Tiền số
+              </a>
+              <a
+                className="whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
+                data-state="closed"
+                href="https://fireant.vn/"
+              >
+                Công cụ đầu tư
+              </a>
+              <a
+                className="max-lg:hidden whitespace-nowrap px-2 py-1 text-base font-semibold tracking-tight text-white rounded-lg hover:text-white transition ease-in flex items-end"
+                data-state="closed"
+                href="/"
+              >
+                Khác
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="w-5 h-5"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </a>
+            </div>
+            <div className="absolute right-0 h-12 flex items-center bg-gradient-to-l from-[#1189e5] dark:from-slate-800 from-35% to-100% to-transparent pl-12 max-md:pl-10 lg:hidden">
+              <div className="w-9 h-9 flex items-center justify-center cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="w-7 h-7 text-white font-bold"
+                  aria-hidden="true"
+                >
+                  <line x1="4" x2="20" y1="12" y2="12"></line>
+                  <line x1="4" x2="20" y1="6" y2="6"></line>
+                  <line x1="4" x2="20" y1="18" y2="18"></line>
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-          <Image
-            className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
-
-        <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-              Docs{' '}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-              Learn{' '}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-              Templates{' '}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-              Deploy{' '}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
-              </span>
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-              Instantly deploy your Next.js site to a shareable URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <VirtualizedList />
       </main>
     </>
   )
